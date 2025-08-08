@@ -1,0 +1,47 @@
+/*Program in C for the following Stack Applications
+a) Evaluation of Suffix expression with single digit operands and operators: +,-,*,/,%,^.
+b) Solving Tower of Hanoi problem with n disks.*/
+#include <stdio.h>
+
+// Recursive function to solve Tower of Hanoi
+void tower(int n, char beg, char aux, char end)
+{
+    if (n == 0) // Check for illegal input
+    {
+        printf("Illegal, Try with non-zero positive integers\n");
+        return;
+    }
+
+    if (n == 1) // Base case: Move a single disk directly
+    {
+        printf("Move disk from %c to %c\n", beg, end);
+    }
+    else // Recursive case: Break the problem into smaller subproblems
+    {
+        // Move (n-1) disks from source (beg) to auxiliary (aux) using destination (end)
+        tower(n-1, beg, end, aux);
+
+        // Move the nth disk from source (beg) to destination (end)
+        tower(1, beg, aux, end);
+
+        // Move (n-1) disks from auxiliary (aux) to destination (end) using source (beg)
+        tower(n-1, aux, beg, end);
+    }
+}
+
+
+
+void main()
+{
+    int n;       // Number of disks
+    char a = 'A', b = 'B', c = 'C'; // Names of the towers (A, B, C)
+
+    // Input the number of disks
+    printf("Enter number of disks\n");
+    scanf("%d", &n);
+
+    // Display steps for Tower of Hanoi solution
+    printf("Tower of Hanoi for %d disks has the following steps:\n", n);
+    tower(n, a, b, c); // Solve Tower of Hanoi problem
+}
+
